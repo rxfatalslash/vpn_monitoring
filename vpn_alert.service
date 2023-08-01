@@ -1,0 +1,12 @@
+[Unit]
+Description=Monitoreo de conexiones al servidor VPN
+After=network.target openvpn.service
+
+[Service]
+Type=simple
+Restart=always
+WorkingDirectory=/etc/systemd/system
+ExecStart=/usr/bin/python3 monitoreo_vpn.py
+
+[Install]
+WantedBy=multi-user.target
