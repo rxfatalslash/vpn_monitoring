@@ -16,7 +16,7 @@ Accede a los ajustes de la cuenta emisor de Gmail y asegurate de que la verifica
 <br/>
 <img src="assets/doble_factor.png" alt="Doble factor" width="600px">
 <br/><br/>
-Para poder usar la contraseña, accede a <a href="https://myacount.google.com/apppasswords">Contraseñas de aplicaciones</a>
+Para poder usar la contraseña, accede a <a href="https://myaccount.google.com/apppasswords">Contraseñas de aplicaciones</a>
 <br/>
 <img src="assets/app_passwords.png" alt="Contraseñas de aplicaciones" width="400px">
 <br/>
