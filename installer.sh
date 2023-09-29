@@ -47,10 +47,10 @@ sudo apt-get install python3
 
 clear
 logo "Copiando archivos y habilitando servicios..."
-sudo cp monitoreo_vpn.py /etc/systemd/system
-sudo cp vpn_alert.service /etc/systemd/system
-sudo chmod u+x /etc/systemd/system/monitoreo_vpn.py
-sudo chmod u+x /etc/systemd/system/vpn_alert.service
+chmod +x monitoreo_vpn.py vpn_alert.service
+sudo cp monitoreo_vpn.py /usr/bin
+sudo cp vpn_alert.service /lib/systemd/system
+sudo ln -s /lib/systemd/system/vpn_alert.service /etc/systemd/system/vpn_alert.service
 
 sudo systemctl daemon-reload
 sudo systemctl enable monitoreo_vpn.service
