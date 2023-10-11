@@ -14,20 +14,6 @@ subject = "Nueva conexión al servidor VPN"
 # Archivo log OpenVPN
 log_route = 'RUTA_LOG_VPN'
 
-def device_info(log_line):
-    # Patrón de extracción de IP y SO
-    ip_patron = r'\[client\] Peer Connection Initiated with \[AF_INET\]([^:]+):(\d+)'
-    so_patron = r'peer_info: Client ([^ ]+)'
-
-    # Buscar IP y SO
-    match_ip = re.search(ip_patron, log_line)
-    match_so = re.search(so_patron, log_line)
-
-    ip = match_ip.group(1) if match_ip else None
-    so = match_so.group(1) if match_so else None
-
-    return ip, so
-
 def send_mail(mensaje):
     msg = MIMEMultipart()
     msg['From'] = mail_user
@@ -44,21 +30,17 @@ def send_mail(mensaje):
     smtp_server.quit()
 
 def vpn_monitor():
-    last_line = ''
+    last_position = 0
     try:
         while True:
-            with open(log_route, 'r') as log_file:
-                lines = log_file.readlines()
+            with open(log_route, 'r') as log:
+                log.seek(last_position)
+                for line in log:
+                    if re.search(f"Peer Connection Initiated with", line):
+                        mensaje = f"Se ha detectado una nueva conexión al servidor VPN"
+                        send_mail(mensaje)
 
-            new_lines = lines[len(last_line):]
-
-            for line in new_lines:
-                ip, so = device_info(line)
-                if ip and so:
-                    mensaje = f"Se ha detectado una nueva conexión al servidor VPN desde:\n\nIP: {ip}\nSO: {so}"
-                    send_sms(mensaje)
-
-            last_line = lines[-1]
+                last_position = log_tell()
 
             time.sleep(1)
 
