@@ -44,9 +44,11 @@ sudo apt-get update -y && apt-get upgrade -y
 clear
 logo "Instalando Python..."
 sudo apt-get install python3
+sudo apt-get install python3-pip
 
 clear
 logo "Copiando archivos y habilitando servicios..."
+pip3 install -r requirements.txt
 chmod +x monitoreo_vpn.py vpn_alert.service
 sudo cp monitoreo_vpn.py /usr/bin
 sudo cp vpn_alert.service /lib/systemd/system

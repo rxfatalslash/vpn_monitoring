@@ -26,7 +26,7 @@ def device_info(log_line):
     ip = match_ip.group(1) if match_ip else None
     so = match_so.group(1) if match_so else None
 
-    return ip, hostname, so
+    return ip, so
 
 def send_mail(mensaje):
     msg = MIMEMultipart()
