@@ -1,32 +1,32 @@
-Este script hecho en Python envía un mensaje con la IP y el SO del dispositivo con a tu correo cada vez que alguien se conecta a la VPN de tu servidor Raspbian.
+This Python script sends a message to your email with the IP and operating system details of the device whenever someone connects to the VPN of your Raspbian server.
 <br/>
-El script se ejcuta continuamente a través de un servicio
+The script runs continuously through a service.
 
-# Configuración script
-Edita el script de Python para configurarlo con los detalles de tu correo y las rutas necesarias
+# Script configuration
+Edit the Python script to configure it with your email details and necessary paths.
 ```
-nano monitoreo_vpn.py
+nano vpn_monitoring.py
 ```
-Crea una cuenta de Gmail que utilizarás sólo para enviar los correos.
+Create a Gmail account that you will use exclusively for sending emails.
 <br/>
-Sustituye la variable de destinatario por el correo en el que quieras recibir las alertas, la variable de emisor por el correo que vas a utilizar para enviar las alertas y la ruta del log por la ruta completa del archivo log de OpenVPN (En Debian y derivados suele ser /var/log/openvpn/openvpn.log)
+Replace the recipient variable with the email where you want to receive alerts, the sender variable with the email you will use to send alerts, and the log path with the full path to the OpenVPN log file (typically /var/log/openvpn/openvpn.log on Debian and derivatives).
 <br/><br/>
-Accede a los ajustes de la cuenta emisor de Gmail y asegurate de que la verificación en dos pasos está activada
-<img src="assets/seguridad.png" alt="Seguridad" width="400px">
+Access the settings of the sender Gmail account and ensure that two-step verification is enabled.
+<img src="assets/security.png" alt="Security" width="400px">
 <br/>
-<img src="assets/doble_factor.png" alt="Doble factor" width="600px">
+<img src="assets/two_factor.png" alt="Two-factor authentication" width="600px">
 <br/><br/>
-Para poder usar la contraseña, accede a <a href="https://myaccount.google.com/apppasswords">Contraseñas de aplicaciones</a>
+To use the password, go to <a href="https://myaccount.google.com/apppasswords">App passwords</a>.
 <br/>
-<img src="assets/app_passwords.png" alt="Contraseñas de aplicaciones" width="400px">
+<img src="assets/app_passwords.png" alt="App passwords" width="400px">
 <br/>
-Copia la clave generada en el valor de la variable password del script de envío.
+Copy the generated key into the password variable value in the sending script.
 
-# Instalación
-Ahora se debe clonar el repositorio en el servidor VPN y ejecutar el instalador
+# Installation
+Now, clone the repository on the VPN server and run the installer.
 ```
-git clone git@github.com:rxfatalslash/monitorizacion_vpn.git
-cd monitorizacion_vpn/
+git clone git@github.com:rxfatalslash/vpn_monitoring.git
+cd vpn_monitoring/
 sh installer.sh
 ```
-Una vez ha terminado de ejcutarse el instalador ya estará instalado Python y configurados los archivos y el servicio
+Once the installer has finished running, Python will be installed, and the files and service will be configured.

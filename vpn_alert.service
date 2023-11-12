@@ -1,5 +1,5 @@
 [Unit]
-Description=Monitoreo de conexiones al servidor VPN
+Description=VPN server connection monitoring
 After=network.target openvpn.service
 
 [Service]

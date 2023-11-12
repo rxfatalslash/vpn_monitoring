@@ -5,14 +5,14 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 # Configuración mail
-mail_user = 'CORREO_EMISOR'
-mail_password = 'CONTRASEÑA_EMISOR'
+mail_user = 'SENDER_MAIL'
+mail_password = 'SENDER_PASSWORD'
 
-dest_user = 'CORREO_DESTINO'
-subject = "Nueva conexión al servidor VPN"
+dest_user = 'DEST_MAIL'
+subject = "New VPN Connection"
 
 # Archivo log OpenVPN
-log_route = 'RUTA_LOG_VPN'
+log_route = 'VPN_LOG_ROUTE'
 
 def send_mail(mensaje):
     msg = MIMEMultipart()
@@ -37,7 +37,7 @@ def vpn_monitor():
                 log.seek(last_position)
                 for line in log:
                     if re.search(f"Peer Connection Initiated with", line):
-                        mensaje = f"Se ha detectado una nueva conexión al servidor VPN"
+                        mensaje = f"A new connection to the VPN server has been detected"
                         send_mail(mensaje)
 
                 last_position = log_tell()
