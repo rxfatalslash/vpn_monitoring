@@ -1,4 +1,4 @@
-This Python script sends a message to your email with the IP and operating system details of the device whenever someone connects to the VPN of your Raspbian server.
+This Python script sends a message to your email whenever someone connects to the VPN of your Raspbian server.
 <br/>
 The script runs continuously through a service.
 
