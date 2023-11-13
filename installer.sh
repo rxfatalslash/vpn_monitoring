@@ -26,7 +26,12 @@ logo () {
 
 logo "rxfatalslash"
 
-printf "%s%sSe va a instalar Python 3 y se va a configurar la ejecución del script de monitorización%s\n\n" "${BLD}" "${CRE}" "${CNC}"
+if [ "$(whoami)" != root ]; then
+    printf "%s%s[ERROR] El script debe ejecutarse como root%s\n\n" "${BLD}" "${CRE}" "${CNC}"
+    exit 0
+fi
+
+printf "%s%s[+] Iniciando proceso de instalación...%s\n\n" "${BLD}" "${CRE}" "${CNC}"
 
 # Confirmación
 while true; do
@@ -34,7 +39,7 @@ while true; do
     case $confirm in
         [Ss]*) break;;
         [Nn]*) exit;;
-        *) printf "%s%sError: Escribe solo 's' o 'n'%s\n\n" "${BLD}" "${CRE}" "${CNC}"
+        *) printf "%s%s[ERROR] Escribe solo 's' o 'n'%s\n\n" "${BLD}" "${CRE}" "${CNC}"
     esac
 done
 
@@ -42,18 +47,18 @@ done
 sudo apt-get update -y && apt-get upgrade -y
 
 clear
-logo "Instalando Python..."
+logo "[+] Instalando Python..."
 sudo apt-get install python3
 sudo apt-get install python3-pip
 
 clear
-logo "Copiando archivos y habilitando servicios..."
+logo "[+] Copiando archivos y habilitando servicios..."
 pip3 install -r requirements.txt
-chmod +x monitoreo_vpn.py vpn_alert.service
-sudo cp monitoreo_vpn.py /usr/bin
+chmod +x vpn_monitoring.py vpn_alert.service
+sudo cp vpn_monitoring.py /usr/bin
 sudo cp vpn_alert.service /lib/systemd/system
 sudo ln -s /lib/systemd/system/vpn_alert.service /etc/systemd/system/vpn_alert.service
 
 sudo systemctl daemon-reload
-sudo systemctl enable monitoreo_vpn.service
-sudo systemctl start monitoreo_vpn.service
+sudo systemctl enable vpn_alert.service
+sudo systemctl start vpn_alert.service
